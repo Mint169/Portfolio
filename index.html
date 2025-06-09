@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio ey | Portfolio">
+  <title>Mint | Portfolio</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --background-dark: #0f0f0f;
+      --text-color: #fff;
+      --accent: #00FFC6;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      font-family: 'Fira Code', monospace;
+      background-color: var(--background-dark);
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+    #bg {
+      background-image: url('');
+      filter: blur(8px);
+      opacity: 0.5;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-size: cover;
+      background-position: center;
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem;
+    }
+    header {
+      height: 200px;
+      filter: blur(195px);
+      background: #222;
+    }
+    #profile {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-top: -80px;
+    }
+    #profile-image img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0, 255, 198, 0.5);
+    }
+    #profile-name h1 {
+      font-size: 2rem;
+      color: var(--accent);
+    }
+    #profile-name p {
+      color: #ccc;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      text-align: center;
+    }
+    .skills-grid div {
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .skills-grid div:hover {
+      background: rgba(0, 255, 198, 0.15);
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      color: #fff;
+    }
+    .card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card h3 {
+      color: var(--accent);
+    }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding: 1rem;
+      color: #aaa;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="bg"></div>
+  <div class="container">
+    <header></header>
+
+    <section id="profile">
+      <div id="profile-image">
+        <img src="pictures/pfp.svg" alt="Profile">
+      </div>
+      <div id="profile-name">
+        <h1>Mint</h1>
+        <p> Developer/Programmer | Tech Enthusiast(ik what a cringy word lol EY this is formal ish idk)</p>
+      </div>
+    </section>
+
+    <section class="glass" id="about">
+      <h2 class="section-title">About Me</h2>
+      <p>Hi, I am Mint you can call me Youssif or Yusuf what u want, i preffer second one. I'm a self-taught developer and I've been coding for almost 5 years now. I picked this hobby during covid-19.
+        
+        I also work with PC hardwares like building them and repairing them, I also help people with troubleshooting and fixing their software issues.
+
+        I Currently Work as Support In Discord p.s(please employ me other servers that I)
+        
+        I also make Minecraft Mods 😊....... The games I mostly play currently are Minecraft, Kinda left Fortnite as their current state is dogwater, Asseto Corsa, Fallguys, The Finals, Rainbow 6.
+        I sometimes play other games with my friends like ready or not and other random games</p>
+    </section>
+
+    <section class="glass" id="skills">
+      <h2 class="section-title">My Programming Skills</h2>
+      <div class="skills-grid">
+        <div><i class="fab fa-html5"></i> HTML5</div>
+        <div><i class="fab fa-css3-alt"></i> CSS3</div>
+        <div><i class="fab fa-js"></i> JavaScript</div>
+        <div><i class="fab fa-java"></i> Java</div>
+        <div><i class="fab fa-node-js"></i> Node.js</div>
+        <div><i class="fab fa-git-alt"></i> Git</div>
+        <div><i class="fab fa-github"></i> GitHub</div>
+        <div><i class="fab fa-bootstrap"></i> Bootstrap</div>
+        <div><i class="fab fa-python"></i> Python</div>
+        <div><i class="fas fa-cube"></i> C / C++</div>
+      </div>
+    </section>
+
+    <section class="glass" id="otherskills">
+      <h2 class="section-title">Other Skills</h2>
+      <div class="skills-grid">
+        <div></i>Fast Learner</div>
+        <div></i>Good Swimmer</div>
+        <div></i>Play Billiards</div>
+        <div></i>Goated in alot of Games</div>
+        <div></i>Tech enthusias </div>
+        <div></i>Fast😕</div>
+        <div></i>Advanced in everything</div>
+        <div></i>Operating System nerd</div>
+        <div></i>Really Good Support Staff</div>
+        <div></i>Can speak multiple languages(2😉)</div>
+      </div>
+    </section>
+    
+    <section class="glass" id="projects">
+      <h2 class="section-title">My Projects</h2>
+      <div class="card-container">
+        <div class="card">
+          <div class="card-content">
+            <h3>Raven3x</h3>
+            <p>Minecraft Hacked Client For PvP</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <h3>IOS Signer</h3>
+            <p>Signs Ipa's using a given certificate</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-content">
+            <h3>Certificate Provider</h3>
+            <p>I provide IOS certificates For all IOS devices(contact if you want one,will discuss prices in DMs</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass" id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p>Email: Yusufwastaken12@gmail.com</p>
+      <p>GitHub: <a href="https://github.com/Mint169" style="color: var(--accent);">github.com/Mint169</a></p>
+      <p>Discord: <a href="https://discord.com/users/732209394871173192" style="color: var(--accent);">Mint1</a></p>
+      <p>Telegram: @Mint1o (i am VERY inactive there)</p>
+      <p>NameMc: <a href="https://namemc.com/profile/Mint1_.1" style="color: var(--accent);">Mint1_</a></p>
+      <p>Instagram: 50Filz</p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Mint1. All rights reserved.</p>
+      <p class="gradient-text">Made with ❤️ 😭</p>
+    </footer>
+  </div>
+</body>
+</html>
