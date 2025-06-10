@@ -558,6 +558,11 @@ body {
     background: var(--accent-blue);
 }
 
+/* Fix spacing between Discord card and about section */
+.about-section {
+    margin-top: 2rem;
+}
+
 /* =========================
    Loading Spinner
    ========================= */
