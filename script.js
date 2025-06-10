@@ -106,34 +106,45 @@ async function updateDiscordCard() {
     // Display name (global_name) is the new Discord display name
     const displayName = user.global_name;
     // Custom status (if set)
-    const customStatus = data.data.activities.find(a => a.type === 4)?.state || "";
-    const gameActivity = data.data.activities.find(a => a.type === 0);
+  // Custom status (type 4)
+const customStatus = data.data.activities.find(a => a.type === 4)?.state || "";
+
+// Game activity (type 0)
+const gameActivity = data.data.activities.find(a => a.type === 0);
 let gameInfo = "";
 if (gameActivity) {
-    gameInfo = `Playing ${gameActivity.name}`;
-    if (gameActivity.details) gameInfo += ` - ${gameActivity.details}`;
+    gameInfo = `🎮 Playing ${gameActivity.name}`;
+    if (gameActivity.details) gameInfo += ` – ${gameActivity.details}`;
     if (gameActivity.state) gameInfo += ` (${gameActivity.state})`;
 }
 
-    // Update card with live data
-    document.querySelector('.status-info h3').textContent = displayName || "";
-    document.querySelector('.status-avatar').src = avatarUrl;
+// Spotify activity (name === "Spotify")
+const spotifyActivity = data.data.activities.find(a => a.name === "Spotify");
+let spotifyInfo = "";
+if (spotifyActivity?.details && spotifyActivity?.state) {
+    spotifyInfo = `🎵 Listening to ${spotifyActivity.details} by ${spotifyActivity.state}`;
+}
+
+// Update display name and avatar
+document.querySelector('.status-info h3').textContent = displayName || "";
+document.querySelector('.status-avatar').src = avatarUrl;
+
+// Determine fallback and avoid duplication
 const fallbackStatus = status.charAt(0).toUpperCase() + status.slice(1);
+let finalCustomStatus = customStatus;
+if (
+    customStatus === spotifyInfo ||
+    customStatus === gameInfo ||
+    (!customStatus && (spotifyInfo || gameInfo))
+) {
+    finalCustomStatus = fallbackStatus;
+}
+document.querySelector('.custom-status').textContent = finalCustomStatus;
 
-// Compare customStatus to both gameInfo and spotifyInfo
-const customEqualsActivity =
-    customStatus === gameInfo || customStatus === spotifyInfo;
-
-// Update custom-status only if it's different from activities
-document.querySelector('.custom-status').textContent =
-    (!customEqualsActivity && customStatus)
-        ? customStatus
-        : fallbackStatus;
-
-// Show Spotify or Game, with priority to Spotify
+// Show activity
 const rpcInfoEl = document.querySelector('.rpc-info');
-rpcInfoEl.textContent =
-    spotifyInfo || gameInfo || "No active activity.";
+rpcInfoEl.textContent = spotifyInfo || gameInfo || "No active activity.";
+
 
 
     // Set Discord icon color based on status
