@@ -120,12 +120,20 @@ if (gameActivity) {
     document.querySelector('.status-avatar').src = avatarUrl;
 const fallbackStatus = status.charAt(0).toUpperCase() + status.slice(1);
 
-// Avoid repeating game info and custom status if they're identical
-document.querySelector('.custom-status').textContent =
-    (customStatus && customStatus !== gameInfo) ? customStatus : fallbackStatus;
+// Compare customStatus to both gameInfo and spotifyInfo
+const customEqualsActivity =
+    customStatus === gameInfo || customStatus === spotifyInfo;
 
+// Update custom-status only if it's different from activities
+document.querySelector('.custom-status').textContent =
+    (!customEqualsActivity && customStatus)
+        ? customStatus
+        : fallbackStatus;
+
+// Show Spotify or Game, with priority to Spotify
 const rpcInfoEl = document.querySelector('.rpc-info');
-rpcInfoEl.textContent = gameInfo || "No active game.";
+rpcInfoEl.textContent =
+    spotifyInfo || gameInfo || "No active activity.";
 
 
     // Set Discord icon color based on status
