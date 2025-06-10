@@ -118,10 +118,15 @@ if (gameActivity) {
     // Update card with live data
     document.querySelector('.status-info h3').textContent = displayName || "";
     document.querySelector('.status-avatar').src = avatarUrl;
-    document.querySelector('.status-info p').textContent =
-        gameInfo || customStatus || (status.charAt(0).toUpperCase() + status.slice(1));
-    const rpcInfoEl = document.querySelector('.rpc-info');
+const fallbackStatus = status.charAt(0).toUpperCase() + status.slice(1);
+
+// Avoid repeating game info and custom status if they're identical
+document.querySelector('.custom-status').textContent =
+    (customStatus && customStatus !== gameInfo) ? customStatus : fallbackStatus;
+
+const rpcInfoEl = document.querySelector('.rpc-info');
 rpcInfoEl.textContent = gameInfo || "No active game.";
+
 
     // Set Discord icon color based on status
     const icon = document.querySelector('.discord-icon');
