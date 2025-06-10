@@ -298,7 +298,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
 }
 .status-avatar-wrapper {
     position: relative; /* Needed for status dot positioning */
