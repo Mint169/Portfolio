@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mint - 17-year-old developer specializing in web development, Minecraft modding, and iOS app signing">
+    <meta name="keywords" content="Developer, Programmer, Minecraft, iOS, Web Development">
+    <meta name="author" content="Mint (Yusuf)">
+    <title>Mint | Developer Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #1a1a1b;
+            --bg-tertiary: #2a2a2b;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #666666;
+            --accent: #00ff88;
+            --accent-blue: #00d4ff;
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --glow: 0 0 20px rgba(0, 255, 136, 0.2);
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-canvas {
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 50%, #16213e 100%);
+            background-size: 400% 400%;
+            animation: gradientFlow 20s ease infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gradientFlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            position: relative;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            opacity: 0.1;
+            filter: blur(100px);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.1); }
+        }
+        
+        .hero {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin: 0 auto 2rem;
+            display: block;
+            filter: drop-shadow(var(--glow));
+            transition: var(--transition);
+        }
+        
+        .avatar:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.4));
+        }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: slideUp 0.8s ease;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            animation: slideUp 0.8s ease 0.2s both;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-grid {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            animation: slideUp 0.8s ease 0.4s both;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .social-btn:hover::before {
+            opacity: 1;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .social-btn i {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .card:hover::before {
+            opacity: 0.03;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: var(--shadow), var(--glow);
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced Discord Status Card */
+        .discord-status-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid rgba(88, 101, 242, 0.3);
+        }
+
+        .discord-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .discord-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            border: 3px solid var(--bg-primary);
+            border-radius: 50%;
+            background: #747f8d;
+        }
+
+        .status-indicator.online { background: #23a55a; }
+        .status-indicator.idle { background: #f0b132; }
+        .status-indicator.dnd { background: #f23f43; }
+        .status-indicator.offline { background: #747f8d; }
+
+        .discord-info {
+            flex: 1;
+        }
+
+        .discord-username {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .discord-status-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .discord-activity {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: var(--radius-sm);
+            margin-top: 0.5rem;
+        }
+
+        .activity-name {
+            font-weight: 500;
+            color: var(--accent);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-details {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .discord-icon {
+            color: #5865f2;
+            font-size: 2rem;
+            margin-left: auto;
+        }
+
+        .loading-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border);
+            border-top: 2px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .skill-tag i {
+            color: var(--accent);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 255, 136, 0.3);
+            box-shadow: var(--shadow), var(--glow);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .project-tag {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .highlight-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .highlight-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-blue);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            .header {
+                height: 50vh;
+            }
+            .social-grid {
+                flex-wrap: wrap;
+            }
+            .discord-status-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .discord-icon {
+                margin: 0;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-canvas"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="hero">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='60' fill='%2300ff88'/%3E%3Ctext x='60' y='75' text-anchor='middle' fill='%23000' font-size='48' font-weight='bold'%3EM%3C/text%3E%3C/svg%3E" alt="Mint's Avatar" class="avatar">
+                <h1>Mint</h1>
+                <p>Developer • Programmer • Tech Enthusiast</p>
+                
+                <div class="social-grid">
+                    <button class="social-btn" onclick="window.open('https://github.com/Mint169', '_blank')" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </button>
+                    <button class="social-btn" onclick="window.open('https://discord.com/users/732209394871173192', '_blank')" aria-label="Discord">
+                        <i class="fab fa-discord"></i>
+                    </button>
+                    <button class="social-btn" onclick="window.open('https://instagram.com/50Filz', '_blank')" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </button>
+                    <button class="social-btn" onclick="window.open('https://t.me/Mint1o', '_blank')" aria-label="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </button>
+                    <button class="social-btn" onclick="window.open('https://namemc.com/profile/Mint1_.1', '_blank')" aria-label="Minecraft">
+                        <i class="fas fa-cube"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="card discord-status-card" id="discordStatus">
+                <div class="discord-avatar">
+                    <img id="discordAvatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%235865f2'/%3E%3C/svg%3E" alt="Discord Avatar">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                </div>
+                <div class="discord-info">
+                    <div class="discord-username" id="discordUsername">
+                        <div class="loading-status">
+                            <div class="loading-spinner"></div>
+                            Loading Discord status...
+                        </div>
+                    </div>
+                    <div class="discord-status-text" id="discordStatusText"></div>
+                    <div class="discord-activity" id="discordActivity" style="display: none;"></div>
+                </div>
+                <i class="fab fa-discord discord-icon"></i>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <div class="card">
+                <div class="card-content">
+                    <div class="about-text">
+                        <p>Hi, I am Mint—you can call me Youssif or Yusuf, whatever you want. I prefer the second one. I'm a 17-year-old self-taught developer and I've been coding for almost half a decade now. I picked up this hobby during COVID-19.</p>
+                        
+                        <p>I also work with PC hardware like building them and repairing them. I help people with troubleshooting and fixing their software issues. I am a pretty good designer and currently work as support in Discord servers.</p>
+                        
+                        <p>The games I mostly play currently are Minecraft, Assetto Corsa, Fall Guys, The Finals, and Rainbow 6. I also make Minecraft Mods and sometimes play other games with my friends like Ready or Not and other random games.</p>
+                        
+                        <p>I provide iOS certificates for all iOS devices (contact me if you want one, we'll discuss prices in DMs).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>Programming</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag"><i class="fab fa-html5"></i>HTML5</span>
+                                <span class="skill-tag"><i class="fab fa-css3-alt"></i>CSS3</span>
+                                <span class="skill-tag"><i class="fab fa-js"></i>JavaScript</span>
+                                <span class="skill-tag"><i class="fab fa-java"></i>Java</span>
+                                <span class="skill-tag"><i class="fab fa-python"></i>Python</span>
+                                <span class="skill-tag"><i class="fas fa-code"></i>C/C++</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>Development Tools</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag"><i class="fab fa-node-js"></i>Node.js</span>
+                                <span class="skill-tag"><i class="fab fa-git-alt"></i>Git</span>
+                                <span class="skill-tag"><i class="fab fa-github"></i>GitHub</span>
+                                <span class="skill-tag"><i class="fab fa-bootstrap"></i>Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <div class="skill-category">
+                            <h3>Specialties</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag"><i class="fas fa-desktop"></i>PC Hardware</span>
+                                <span class="skill-tag"><i class="fas fa-mobile-alt"></i>iOS Signing</span>
+                                <span class="skill-tag"><i class="fas fa-gamepad"></i>Game Modding</span>
+                                <span class="skill-tag"><i class="fas fa-palette"></i>UI/UX Design</span>
+                                <span class="skill-tag"><i class="fas fa-shield-alt"></i>Tech Support</span>
+                                <span class="skill-tag"><i class="fas fa-language"></i>Multilingual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Here are some of my projects and works. Click to learn more.</p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Raven3x</h3>
+                        <div class="project-tag">Minecraft Hacked Client</div>
+                        <p>A Minecraft Hacked Client designed for PvP with advanced features and optimizations for competitive gameplay.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>iOS Signer</h3>
+                        <div class="project-tag">Certificate Signing Tool</div>
+                        <p>Signs IPA files using certificates, allowing users to install custom applications on their iOS devices.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>Certificate Provider</h3>
+                        <div class="project-tag">iOS Development Service</div>
+                        <p>I provide iOS certificates for all iOS devices. Contact me for pricing and specifications.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-content">
+                        <h3>More Projects</h3>
+                        <div class="project-tag">Coming Soon</div>
+                        <p>I have more projects in development, currently on hold due to other commitments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">iOS Certificates</h2>
+            <div class="card">
+                <div class="card-content">
+                    <div class="about-text">
+                        <p>Need iOS certificates? <a href="https://discord.com/users/732209394871173192" class="highlight-link">DM me on Discord</a> to discuss pricing and specifications tailored to your needs.</p>
+                        
+                        <p><strong>Available Options:</strong></p>
+                        <p>• 72-hour delivery certificates<br>
+                        • 24-hour delivery certificates<br>
+                        • Instant delivery certificates<br>
+                        • Blacklisted device support<br>
+                        • iPad-specific certificates</p>
+                        
+                        <p><a href="https://discord.com/users/732209394871173192" class="highlight-link">Contact me for pricing →</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section fade-in">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="card">
+                <div class="card-content">
+                    <div class="about-text">
+                        <p><strong>GitHub:</strong> <a href="https://github.com/Mint169" class="highlight-link">Mint169</a></p>
+                        <p><strong>Discord:</strong> <a href="https://discord.com/users/732209394871173192" class="highlight-link">Mint1</a></p>
+                        <p><strong>Minecraft:</strong> <a href="https://namemc.com/profile/Mint1_.1" class="highlight-link">Mint1_</a></p>
+                        <p><strong>Email:</strong> Yusufwastaken12@gmail.com</p>
+                        <p><strong>Instagram:</strong> 50Filz</p>
+                        <p><strong>Telegram:</strong> @Mint1o (rarely active)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Mint (Yusuf). All rights reserved.</p>
+            <p class="text-gradient">Made with ❤️ & passion</p>
+        </div>
+    </footer>
+
+    <script>
+        class DiscordStatus {
+            constructor() {
+                this.userId = '732209394871173192';
+                this.apiUrl = `https://api.lanyard.rest/v1/users/${this.userId}`;
+                this.init();
+            }
+
+            async init() {
+                try {
+                    await this.fetchDiscordStatus();
+                    // Update every 30 seconds
+                    setInterval(() => this.fetchDiscordStatus(), 30000);
+                } catch (error) {
+                    this.showError();
+                }
+            }
+
+            async fetchDiscordStatus() {
+                try {
+                    const response = await fetch(this.apiUrl);
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch Discord status');
+                    }
+
+                    const data = await response.json();
+                    
+                    if (data.success && data.data) {
+                        this.updateUI(data.data);
+                    } else {
+                        this.showError();
+                    }
+                } catch (error) {
+                    console.error('Error fetching Discord status:', error);
+                    this.showError();
+                }
+            }
+
+            updateUI(userData) {
+                const {
+                    discord_user,
+                    discord_status,
+                    activities,
+                    spotify
+                } = userData;
+
+                // Update username
+                document.getElementById('discordUsername').textContent = 
+                    discord_user.display_name || discord_user.username;
+
+                // Update avatar
+                const avatarUrl = `https://cdn.discordapp.com/avatars/${discord_user.id}/${discord_user.avatar}.png?size=128`;
+                document.getElementById('discordAvatar').src = avatarUrl;
+
+                // Update status indicator
+                const statusIndicator = document.getElementById('statusIndicator');
+                statusIndicator.className = `status-indicator ${discord_status}`;
+
+                // Update status text
+                const statusText = this.getStatusText(discord_status);
+                document.getElementById('discordStatusText').textContent = statusText;
+
+                // Update activity
+                this.updateActivity(activities, spotify);
+            }
+
+            updateActivity(activities, spotify) {
+                const activityDiv = document.getElementById('discordActivity');
+                
+                // Check for Spotify first
+                if (spotify) {
+                    activityDiv.style.display = 'block';
+                    activityDiv.innerHTML = `
+                        <div class="activity-name">🎵 Listening to Spotify</div>
+                        <div class="activity-details">${spotify.song} by ${spotify.artist}</div>
+                    `;
+                    return;
+                }
+
+                // Check for other activities
+                const relevantActivity = activities?.find(activity => 
+                    activity.type !== 4 && activity.name !== 'Custom Status'
+                );
+
+                if (relevantActivity) {
+                    activityDiv.style.display = 'block';
+                    const activityIcon = this.getActivityIcon(relevantActivity.name);
+                    activityDiv.innerHTML = `
+                        <div class="activity-name">${activityIcon} ${relevantActivity.name}</div>
+                        <div class="activity-details">${relevantActivity.details || 'Playing'}</div>
+                    `;
+                } else {
+                    activityDiv.style.display = 'none';
+                }
+            }
+
+            getActivityIcon(activityName) {
+                const name = activityName.toLowerCase();
+                if (name.includes('minecraft')) return '🎮';
+                if (name.includes('code') || name.includes('vscode')) return '💻';
+                if (name.includes('spotify')) return '🎵';
+                if (name.includes('youtube')) return '📺';
+                if (name.includes('chrome') || name.includes('firefox')) return '🌐';
+                return '🎮';
+            }
+
+            getStatusText(status) {
+                switch (status) {
+                    case 'online':
+                        return 'Online';
+                    case 'idle':
+                        return 'Away';
+                    case 'dnd':
+                        return 'Do Not Disturb';
+                    case 'offline':
+                    default:
+                        return 'Offline';
+                }
+            }
+
+            showError() {
+                document.getElementById('discordUsername').innerHTML = `
+                    <div style="color: var(--text-muted);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Unable to load Discord status
+                    </div>
+                `;
+                document.getElementById('discordStatusText').textContent = 'Status unavailable';
+                document.getElementById('discordActivity').style.display = 'none';
+            }
+        }
+
+        // Initialize Discord status when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new DiscordStatus();
+            new Portfolio();
+        });
+
+        // Portfolio functionality
+        class Portfolio {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupScrollAnimations();
+                this.setupProjectCards();
+            }
+
+            setupScrollAnimations() {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+
+            setupProjectCards() {
+                const projectCards = document.querySelectorAll('.project-card');
+                projectCards.forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-10px) scale(1.02)';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0) scale(1)';
+                    });
+                });
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
