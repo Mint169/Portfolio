@@ -107,12 +107,19 @@ async function updateDiscordCard() {
     const displayName = user.global_name;
     // Custom status (if set)
     const customStatus = data.data.activities.find(a => a.type === 4)?.state || "";
+    const gameActivity = data.data.activities.find(a => a.type === 0);
+let gameInfo = "";
+if (gameActivity) {
+    gameInfo = `Playing ${gameActivity.name}`;
+    if (gameActivity.details) gameInfo += ` - ${gameActivity.details}`;
+    if (gameActivity.state) gameInfo += ` (${gameActivity.state})`;
+}
 
     // Update card with live data
     document.querySelector('.status-info h3').textContent = displayName || "";
     document.querySelector('.status-avatar').src = avatarUrl;
     document.querySelector('.status-info p').textContent =
-        customStatus || (status.charAt(0).toUpperCase() + status.slice(1));
+        gameInfo || customStatus || (status.charAt(0).toUpperCase() + status.slice(1));
 
     // Set Discord icon color based on status
     const icon = document.querySelector('.discord-icon');
