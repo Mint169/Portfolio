@@ -162,5 +162,5 @@ async function updateDiscordCard() {
 // Run Discord card update after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     updateDiscordCard();
-    setInterval(updateDiscordCard, 10000);
+    setInterval(updateDiscordCard, 1000);
 });
