@@ -1771,7 +1771,7 @@ class GlobalVisitorCounter {
         try {
             await this.updateVisitorCount();
             // Update counter every 10 seconds to show real-time changes
-            setInterval(() => this.updateCounterDisplay(), 10000);
+            setInterval(() => this.updateCounterDisplay(), 1000);
         } catch (error) {
             console.log('Using fallback counter:', error);
             this.useFallbackCounter();
